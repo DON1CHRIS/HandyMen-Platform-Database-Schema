@@ -1,0 +1,138 @@
+CREATE TABLE `Handymen_Personal_Info` (
+  `Handyman_ID` <type>,
+  `User_ID` <type>,
+  `First_name` <type>,
+  `Last_name` <type>,
+  `D.O.B` <type>,
+  `Email` <type>,
+  `Phone_number` <type>,
+  `Address ` <type>
+);
+
+CREATE TABLE `HANDYMEN SKILLS & EXPERIENCE ` (
+  `HANDYMAN_ID` <type>,
+  `EXPERIENCE` <type>,
+  `SKILLS` <type>,
+  FOREIGN KEY (`HANDYMAN_ID`) REFERENCES `Handymen_Personal_Info`(`Handyman_ID`)
+);
+
+CREATE TABLE `ESCROW TABLE` (
+  `Escrow_ID` <type>,
+  `Appointment_ID` <type>,
+  `Amount` <type>,
+  `Status` <type>,
+  `Deposit_time` <type>,
+  `Update_time` <type>
+);
+
+CREATE TABLE `User Table` (
+  `User_ID` <type>,
+  `User_Type` <type>,
+  `Username` <type>,
+  `Email` <type>,
+  `Password` <type>,
+  `Status` <type>
+);
+
+CREATE TABLE `Handymen_KYC_Verification_Docs` (
+  `Handyman_ID` <type>,
+  `ID_Type` <type>,
+  `ID_Number` <type>,
+  `FRONT_PICTURE` <type>,
+  `BACK_PICTURE` <type>,
+  `KYC_SELFIE` <type>,
+  FOREIGN KEY (`Handyman_ID`) REFERENCES `Handymen_Personal_Info`(`Handyman_ID`)
+);
+
+CREATE TABLE `Handymen_Payment Info` (
+  `Handyman_ID` <type>,
+  `Account_Type` <type>,
+  `Account_Number` <type>,
+  `Account_Name` <type>,
+  FOREIGN KEY (`Handyman_ID`) REFERENCES `Handymen_Personal_Info`(`Handyman_ID`)
+);
+
+CREATE TABLE `Client_Personal_Info` (
+  `Client_ID` <type>,
+  `User_ID` <type>,
+  `First_name` <type>,
+  `Last_name` <type>,
+  `D.O.B` <type>,
+  `Email` <type>,
+  `Phone_number` <type>,
+  `Address ` <type>
+);
+
+CREATE TABLE `Service_Table` (
+  `Service_ID` <type>,
+  `Client_ID` <type>,
+  `Service_Title` <type>,
+  `Description` <type>,
+  `Date_Needed` <type>,
+  `Importance` <type>,
+  `Timestamp` <type>,
+  `Status` <type>,
+  FOREIGN KEY (`Client_ID`) REFERENCES `Client_Personal_Info`(`Client_ID`)
+);
+
+CREATE TABLE `APPOINTMENT LIST` (
+  `APPOINTMENT_ID` <type>,
+  `SERVICE_ID` <type>,
+  `DATE_OF_APPOINTMENT` <type>,
+  `APPOINTMENT_TIME` <type>,
+  `MEETUP_ADDRESS` <type>,
+  `BUDGET` <type>,
+  `STATUS` <type>
+);
+
+CREATE TABLE `RATE AND FEDBACK ` (
+  `APPOINTMENT_ID` <type>,
+  `RATE` <type>,
+  `FEEDBACK` <type>,
+  `FROM` <type>,
+  `TO` <type>,
+  FOREIGN KEY (`APPOINTMENT_ID`) REFERENCES `APPOINTMENT LIST`(`APPOINTMENT_ID`)
+);
+
+CREATE TABLE `Client_KYC_Verification_Docs` (
+  `Client_ID` <type>,
+  `ID_Type` <type>,
+  `ID_Number` <type>,
+  `FRONT_PICTURE` <type>,
+  `BACK_PICTURE` <type>,
+  `KYC_SELFIE` <type>,
+  FOREIGN KEY (`Client_ID`) REFERENCES `Client_Personal_Info`(`Client_ID`)
+);
+
+CREATE TABLE `Service Proposal` (
+  `Service_ID` <type>,
+  `Handyman_ID` <type>,
+  `Request_TimeStamp` <type>,
+  `Status` <type>,
+  `Acceptance/Cancellation_Time` <type>,
+  FOREIGN KEY (`Handyman_ID`) REFERENCES `Handymen_Personal_Info`(`Handyman_ID`)
+);
+
+CREATE TABLE `Account Access Info` (
+  `User_ID` <type>,
+  `Access_Type` <type>,
+  `Timestamp` <type>,
+  FOREIGN KEY (`User_ID`) REFERENCES `User Table`(`User_ID`)
+);
+
+CREATE TABLE `Password Update Info` (
+  `User_ID` <type>,
+  `Old_Password` <type>,
+  `New_Password` <type>,
+  `Timestamp_of_update` <type>,
+  FOREIGN KEY (`User_ID`) REFERENCES `Account Access Info`(`User_ID`)
+);
+
+CREATE TABLE `Client_Payment Info` (
+  `Client_ID` <type>,
+  `Account_Type` <type>,
+  `Account_Number` <type>,
+  `Account_Name` <type>,
+  FOREIGN KEY (`Client_ID`) REFERENCES `Client_Personal_Info`(`Client_ID`)
+);
+
